@@ -120,12 +120,10 @@ public class AppTest
     public void ValidInviteRequest() throws IOException, InterruptedException {
       JSONObject request = new JSONObject(inviteRequest.toString());
       request.remove("email");
-      request.put("phone", "+447448363152");
+      request.put("phone", "+447555555555");
       CloseableHttpResponse response = client.PostRequest("/invites", request.toString());
       String  responseString = EntityUtils.toString(response.getEntity());
       JSONObject responseJson = new JSONObject(responseString);
-      assertEquals(responseJson.getBoolean("enableDarkWeb"), true);
-      assertEquals(responseJson.getBoolean("enableCrossCheck"), true);
       assertEquals(responseJson.getBoolean("send"), true);
       assertEquals(response.getStatusLine().getStatusCode(), 201);
     }
